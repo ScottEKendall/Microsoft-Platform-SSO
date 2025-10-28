@@ -119,6 +119,8 @@ _If you do not run this Device Compliance, the user might get the "register your
 
 I have an EA script that I use to determine the status of the User(s) registration status and create groups accordingly.... It is multi-user aware. Script can be found [here](https://github.com/ScottEKendall/JAMF-Pro-EAs/blob/main/InTune%20Registration%20Status.sh)
 
+![](JAMF_EA_Registration.png)
+
 ## Scripts used for Platform SSO ##
 
 This script can be used to determine Device Compliance for both the SSO Extension and Platform SSO.  If the system is registered with Platform SSO, it still needs to acqire the AAD token.
@@ -161,8 +163,6 @@ fi
 echo "no WPJ key found"
 exit 1
 ```
-
-![](JAMF_EA_Registration.png)
 
 ## Reference Documentation ##
 
