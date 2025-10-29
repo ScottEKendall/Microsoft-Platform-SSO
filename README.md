@@ -216,3 +216,4 @@ Other Links:
 * Comprehensive guide on configuring inTune for pSSO / inTune MacAdmins [here:](https://www.intunemacadmins.com/complete-guide-macos-deployment/configure_macos_platform_sso/)
 * How to configure pSSO / SimpleMDM [here](https://simplemdm.com/blog/how-to-configure-platform-single-sign-on/)
 * Aaron Polley / How To Hold macOS User Identity in 2025 [here](https://aarondavidpolley.com/how-to-hold-macos-user-identity-in-2025/)
+* MacOS Conditional Access Best Practices [here](https://github.com/benwhitis/Jamf_Conditional_Access/wiki/MacOS-Conditional-Access-Best-Practices)
