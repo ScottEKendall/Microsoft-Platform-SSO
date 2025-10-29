@@ -3,7 +3,7 @@
 This repository is designed to consolidate everything a Jamf Pro admin might need to configure Platform SSO with Microsoft Entra, and to migrate existing Macs.  I am hoping for other contributors to help make this repo a useful source of information for everything related to this framework.  The repo currently focuses on using Platform SSO with the Jamf Pro MDM, but others are welcome to share configuration files, processes, and best practices for other MDMs.
 
 <p align="center">
-  <img src="./PlatformSSO_Icon.jpg" />
+  <img src="images/PlatformSSO_Icon.jpg" />
 </p>
 
 ### AI (Gemini) Overview ###
@@ -67,10 +67,10 @@ In order to prepare for Platform SSO deployment, you must perform the following:
 
 When setting up the Configuration Profile, you can use either the Microsoft [docs](https://learn.microsoft.com/en-us/intune/intune-service/configuration/use-enterprise-sso-plug-in-macos-with-intune?tabs=prereq-jamf-pro%2Ccreate-profile-jamf-pro) or Jamf Pro [docs](https://learn.jamf.com/en-US/bundle/technical-articles/page/Platform_SSO_for_Microsoft_Entra_ID.html#ariaid-title9).  I have included screenshots of my setup for easier reference:
 
-![](./JAMF_Configuration_Policy_Summary.png)
-![](./JAMF_Configuration_Poicy_SSO_Payload1.png)
-![](./JAMF_Configuration_Poicy_SSO_Payload2.png)
-![](./JAMF_Configuration_Poicy_SSO_Payload3.png)
+![](images/JAMF_Configuration_Policy_Summary.png)
+![](images/JAMF_Configuration_Poicy_SSO_Payload1.png)
+![](images/JAMF_Configuration_Poicy_SSO_Payload2.png)
+![](images/JAMF_Configuration_Poicy_SSO_Payload3.png)
 
 Please note: you must configure an Associate Domain payload, but it does NOT need to have any contents.
 
@@ -81,11 +81,11 @@ You will need to make some changes to your ADE (Automated Device Enrollment) set
 1. In the Jamf Pro console, navigate to Computers > PreStage Enrollment
 2. In the General section, you need to "Enable Simplified setup" and add "com.microsoft.CompanyPortalMac" in the field
 
-![](./JAMF_ADE_General.png)
+![](images/JAMF_ADE_General.png)
 
 3. In the Configuration Profiles section, make sure that your Platform SSO group is checked, so it will get pushed down during new enrollments
 
-![](./JAMF_ADE_ConfigProfiles.png)
+![](images/JAMF_ADE_ConfigProfiles.png)
 
 4. Make sure to add the Company Portal app in the Enrollment Packages section
 
@@ -95,7 +95,7 @@ You need to have a configuration profile for the Platform SSO that can be deploy
 
 The best way to do this is to create groupings and deploy the pSSO to the users in the group, while simultenously excluding them from the SSO Extension group.  Screenshot for exxample:
 
-![](./JAMF_Configuration_Policy_Groupings.png)
+![](images/JAMF_Configuration_Policy_Groupings.png)
 
 ### 5. Enable Access to System Settings ###
 
@@ -130,7 +130,7 @@ You need to make sure that Device Compliance is run after the user(s) registers 
 1.  Deliver a policy that executes the command ```/usr/local/jamf/bin/jamfAAD gatherAADInfo```
 2.  Have the user run your Register with Entra policy from SS / SS+
 
-![](./JAMF_Device%20Compliance.png)
+![](images/JAMF_Device%20Compliance.png)
 
 _If you do not run this Device Compliance, the user might get the "register your device" when trying to authenticate._
 
@@ -152,7 +152,7 @@ This script can be used to determine Device Compliance for both the extensible S
 
 When moving away from the (old) extensible SSO method, the "workplace join key" that was present in the Keychain will no longer be there as the functionality of the (new) pSSO has been moved into the Secure Enclave on the mac.  So users will (should) not see this image any longer:
 
-![](./WPJKeychain.png)
+![](images/WPJKeychain.png)
 
 If you have any Smart/Static Groups or EAs that look for the WPJ Key in the users keychain, you need to change your logic to use the ```app-sso platform -s``` terminal command to determine SSO status.
 
