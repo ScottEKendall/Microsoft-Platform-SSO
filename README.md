@@ -142,9 +142,11 @@ I have an EA script that I use to determine user registration status and create 
 
 ## Scripts used for Platform SSO ##
 
+See the [scripts](scripts/) folder for full script contents.
+
 ### Verify Device Compliance via Extensible SSO and Platform SSO.sh
 
-[This script](Verify Device Compliance via Extensible SSO and Platform SSO.sh) can be used to determine Device Compliance for both the extensible SSO (SSOe) and Platform SSO. (pSSO).  If the system is registered with Platform SSO, it still needs to acquire the AAD token.
+This script can be used to determine Device Compliance for both the extensible SSO (SSOe) and Platform SSO. (pSSO).  If the system is registered with Platform SSO, it still needs to acquire the AAD token.
 
 ## Changes from Extensible SSO ##
 
