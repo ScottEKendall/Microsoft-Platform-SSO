@@ -1,31 +1,44 @@
 ## Plaform SSO Repository ##
 
-This sub-repo section is designed to accomodate everything Micdrosoft Platform SSO related.  My goal is to try and consolidate everything that an admin needs to be aware of when migrating users to Platform SSO for macOS Sequoia and higher.  I am hoping for other contributors in this repo to make this a central repository for everything related to this extension.  I will be posting the information that I have concerning JAMF MDM, but others are welcome to post about configuration files / processes for other MDMs.
+This repository is designed to accomodate everything Micdrosoft Platform SSO related.  My goal is to try and consolidate everything that an admin needs to be aware of when migrating users to Platform SSO for macOS Sequoia and higher.  I am hoping for other contributors in this repo to make this a central repository for everything related to this extension.  I will be posting the information that I have concerning JAMF MDM, but others are welcome to post about configuration files / processes for other MDMs.
 
 <p align="center">
   <img src="./PlatformSSO_Icon.jpg" />
 </p>
 
 ### AI (Gemini) Overview ###
+_of Extensible SSO vs Platform SSO_
 
-Platform SSO is an OS-level integration that enables single sign-on for apps and websites, often seen with Apple's macOS, while Enterprise SSO is a broader category of services that use an identity provider to grant single sign-on access to multiple applications for an entire organization. Platform SSO builds on Enterprise SSO capabilities to provide a more seamless experience by managing authentication directly at the operating system level, rather than through a browser or separate application. 
+Extensible SSO is the underlying framework that allows third-party extensions to enable single sign-on (SSO) on Apple devices, while Platform SSO is an evolution of this technology that provides a more deeply integrated, device-centric SSO experience for macOS. 
+Platform SSO offers a more seamless sign-on process for users and deeper integration with Microsoft Entra ID (formerly Azure AD), especially for organizations that have embraced hybrid work and passwordless authentication. 
 
-__Platform SSO__
+| Feature            | Extensible SSO (SSOe)                                                                                                                                       | Platform SSO (PSSO)                                                                                                                                                                                                                |
+| :----------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| User experience    | Less integrated; users typically had to sign in to unlock the device and then sign in again to activate the SSO extension.                                  | Highly integrated; users sign in once with their Microsoft Entra ID credentials at the macOS login screen, eliminating the need for a second sign-in for apps.                                                                     |
+| Scope              | App-centric. A third-party SSO extension could handle authentication for multiple applications, which was flexible for apps that lacked native SSO support. | Device-centric. It works at the device level and includes the underlying SSO app extension. When you configure Platform SSO, you don't need to configure the app extension separately.                                             |
+| Authentication     | Supported a variety of authentication protocols, such as OAuth, OpenID Connect, and SAML2.                                                                  | Supports modern authentication methods, including passwordless authentication with a hardware-bound key (Platform Credential), smart cards, and Entra ID passwords. It also supports Kerberos-based SSO for on-premises resources. |
+| Credential syncing | Did not automatically sync the local account password with the cloud identity password.                                                                     | With the password authentication method, the user's Microsoft Entra ID password is synchronized with their local macOS account password.                                                                                           |
+| Prerequisites      | Requires a Mobile Device Management (MDM) profile to be deployed for the SSO app extension.                                                                 | Requires the macOS device to be enrolled in an MDM and the latest Microsoft Intune Company Portal app to be installed.                                                                                                             |
+| Device enrollment  | Supports user and device enrollment.                                                                                                                        | Supports Entra ID Join for Macs, allowing any organizational user to sign into the device.                                                                                                                                         |
+| Availability       | Available on iOS, iPadOS, and macOS.                                                                                                                        | Primary focus is on macOS 14+ for the best experience.                                                                                                                                                                             |
 
-* __Level of integration:__ Works at the operating system level to integrate with the user's local account credentials.
-* __Key benefit:__ Provides a more streamlined and seamless experience, as authentication can happen transparently in the background for both native and web applications on the device.
-* __Example:__ Apple's Platform SSO feature for macOS, which replaces directory binding and synchronizes local account credentials with an identity provider like Microsoft Entra ID. 
 
-__Enterprise SSO__
+**When to use which**
 
-* __Level of integration:__ A broader concept that provides a centralized authentication service for an entire organization's applications.
-* __Key benefit:__ Simplifies password management, improves security, and reduces help desk tickets across a wide range of business applications.
-* __Example:__ A user logs into an enterprise SSO portal once and is then granted access to all connected applications, including web-based services and legacy apps that may not support modern identity protocols. 
+For most modern deployments, Platform SSO is the recommended choice for macOS devices because of its superior user experience and tighter integration with Microsoft Entra ID. 
 
-__How they work together__
-* __Platform SSO is an implementation of Enterprise SSO:__ Platform SSO is a specific technology that builds on Enterprise SSO concepts to achieve a deeper level of integration with the operating system.
-* __Platform SSO leverages an Enterprise SSO service:__ It uses an Enterprise SSO service (and its associated identity provider) to handle the authentication, but performs the actual single sign-on process directly on the device.
-* __Example:__ In a macOS environment, Microsoft's Platform SSO uses the Microsoft Entra ID Enterprise SSO plug-in to handle authentication, but integrates with the macOS system to provide background, OS-level sign-on
+* Choose Platform SSO if you:
+    * Want to simplify the login process for your Mac users.
+    * Are adopting passwordless authentication methods.
+    * Want to fully integrate your Macs with Microsoft Entra ID.
+    * Manage macOS devices with Microsoft Intune or another compatible MDM.
+
+* Use the legacy Extensible SSO framework if you:
+    * Need to support older Apple devices running macOS 13 or earlier.
+    * Need the flexibility to use a third-party SSO extension for specific applications.
+    * Only require the SSO app extension for authentication without the deeper platform integration.
+
+--- End AI Generated Overview ----
 
 ### JAMF Configuration ###
 
