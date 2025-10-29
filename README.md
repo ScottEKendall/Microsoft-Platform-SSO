@@ -44,13 +44,13 @@ For most modern deployments, Platform SSO is the recommended choice for macOS de
 
 In order to prepare for Platform SSO deployment, you must perform the following:
 
-1. [Deploy Microsoft Company Portal](#company-portal)
-2. [Create the Platform SSO Configuration Profile](#create-psso-configuration-profile)
-3. [Configure ADE for Simplified Setup](#configure-ade-for-simplified-setup)
-4. [Remove any existing SSO Extension Profile](#remove-the-old-sso-exension)
-5. [Enable access to System Settings](#enable-access-to-system-settings)
-6. [Make sure Touch ID is enabled](#enable-touch-id)
-7. [Deliver the Platform SSO Configuration Profile](#deliver-the-psso-config-profile)
+1. [Deploy Microsoft Company Portal](#1-company-portal)
+2. [Create the Platform SSO Configuration Profile](#2-create-psso-configuration-profile)
+3. [Configure ADE for Simplified Setup](#3-configure-ade-for-simplified-setup)
+4. [Remove any existing SSO Extension Profile](#4-remove-the-old-sso-exension)
+5. [Enable access to System Settings](#5-enable-access-to-system-settings)
+6. [Make sure Touch ID is enabled](#6-enable-touch-id)
+7. [Deliver the Platform SSO Configuration Profile](#7-deliver-the-psso-config-profile)
 8. [Run Device Compliance](#8-run-device-compliance)
 
 ### Misc Stuff (Notes / Scripts / EAs)
