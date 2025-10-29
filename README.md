@@ -52,6 +52,7 @@ In order to prepare for Platform SSO deployment, you must perform the following:
 6. [Make sure touchID is enabled](#enable-touchid)
 7. [Deliver the PlatformSSO Configuration Profile](#deliver-the-psso-config-profile)
 8. [Run Device Compliance from CompanyPorta](#8-device-compliance)
+9. [Changes from Exensible SSO](#changes-from-extensible-sso)
 
 ### 1. Company Portal ###
 
@@ -176,6 +177,15 @@ fi
 echo "no WPJ key found"
 exit 1
 ```
+
+## Changes from Extensible SSO ##
+
+When moving away from the (old) extensible SSO method, the "workplace join key" that was present in the Keychain will no longer be there as the functionality of the (new) pSSO has been moved into the Secure Enclave on the mac.  So users will (should) not see this image any longer:
+
+![](./WPJKeychain.png)
+
+If you have any Smart/Static Groups or EAs that look for the WPJ Key in the users keychain, you need to change your logic to use the ```app-sso platform -s``` terminal command to determine SSO status.
+
 
 ## Reference Documentation ##
 
