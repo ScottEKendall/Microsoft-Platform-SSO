@@ -51,7 +51,7 @@ In order to prepare for Platform SSO deployment, you must perform the following:
 5. [Enable access to the System Settings](#enable-access-to-system-settings)
 6. [Make sure touchID is enabled](#enable-touchid)
 7. [Deliver the PlatformSSO Configuration Profile](#deliver-the-psso-config-profile)
-8. [Run Device Compliance from CompanyPorta](#8-device-compliance)
+8. [Run Device Compliancel](#8-device-compliance)
 
 ### Misc Stuff (Notes / Scripts / EAs)
 
@@ -123,7 +123,7 @@ In case the users do not see the notification center prompt (or they dismiss it)
 
 <img src="https://github.com/ScottEKendall/JAMF-Pro-Scripts/raw/main/ForcePlatformSSO/ForcePlatformSSO.png" width="500" height="400">
 
-## 8. Device Compliance ##
+## 8. Run Device Compliance ##
 
 You need to make sure that Device Compliance is run after the user(s) registers with Platform SSO. You can do this one of two ways:
 
@@ -215,3 +215,4 @@ Other Links:
 
 * Comprehensive guide on configuring inTune for pSSO / inTune MacAdmins [here:](https://www.intunemacadmins.com/complete-guide-macos-deployment/configure_macos_platform_sso/)
 * How to configure pSSO / SimpleMDM [here](https://simplemdm.com/blog/how-to-configure-platform-single-sign-on/)
+* Aaron Polley / How To Hold macOS User Identity in 2025 [here](https://aarondavidpolley.com/how-to-hold-macos-user-identity-in-2025/)
