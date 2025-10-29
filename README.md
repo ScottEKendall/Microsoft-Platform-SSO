@@ -209,6 +209,7 @@ I am trying to stick with the company "official" docs as much as possible, but I
 * [Add the macOS Company Portal App](https://learn.microsoft.com/en-us/intune/intune-service/apps/apps-company-portal-macos)
 * [Microsoft Enterprise SSO plug-in for Apple devices](https://learn.microsoft.com/en-us/entra/identity-platform/apple-sso-plugin)
 * [Common Platform SSO scenarios for macOS devices](https://learn.microsoft.com/en-us/intune/intune-service/configuration/platform-sso-scenarios)
+* [Troubleshooting the Microsoft Enterprise SSO Extension plugin on Apple devices](https://learn.microsoft.com/en-us/entra/identity/devices/troubleshoot-mac-sso-extension-plugin)
 
 ### Other Resources
 
