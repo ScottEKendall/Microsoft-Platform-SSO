@@ -44,14 +44,14 @@ For most modern deployments, Platform SSO is the recommended choice for macOS de
 
 In order to prepare for Platform SSO deployment, you must perform the following:
 
-1. [Deploy Microsoft Company Portal](#company-portal)
-2. [Create the Platform SSO Configuration Profile](#ceate-psso-configuration-profile)
-3. [Configure ADE for Simplified Setup](#configure-ade-for-simplied-setup)
-4. [Remove any existing SSO Extension Profile](#removing-the-sso-exension)
-5. [Enable access to the System Settings](#enable-access-to-system-settings)
-6. [Make sure touchID is enabled](#enable-touchid)
-7. [Deliver the PlatformSSO Configuration Profile](#deliver-the-psso-config-profile)
-8. [Run Device Compliancel](#8-device-compliance)
+1. [Deploy Microsoft Company Portal](#1-company-portal)
+2. [Create the Platform SSO Configuration Profile](#2-create-psso-configuration-profile)
+3. [Configure ADE for Simplified Setup](#3-configure-ade-for-simplied-setup)
+4. [Remove any existing SSO Extension Profile](#4-removing-the-old-sso-exension)
+5. [Enable access to the System Settings](#5-enable-access-to-system-settings)
+6. [Make sure touchID is enabled](#6-enable-touchid)
+7. [Deliver the PlatformSSO Configuration Profile](#7-deliver-the-psso-config-profile)
+8. [Run Device Compliancel](#8-run-device-compliance)
 
 ### Misc Stuff (Notes / Scripts / EAs)
 
@@ -119,7 +119,19 @@ Once you have setup your smart/static group for deployment, you can push it to a
 
 And the user will need to proceed with the registration prompts.
 
-In case the users do not see the notification center prompt (or they dismiss it), it will reappear after a period of time (I think around 15 mins), but you can "force" the prompt to reappear again.  You can either have the user logout/login, or you can use a script I created (found [here](https://github.com/ScottEKendall/JAMF-Pro-Scripts/blob/main/ForcePlatformSSO/README.md) that will force the prompt to reappear and show a nice GUI screen so the users (hopefully) don't miss it again.
+In case the users do not see the notification center prompt (or they dismiss it), it will reappear after a period of time (I think around 15 mins), but you can "force" the prompt to reappear again.  These are a few ways that you can accomplish this:
+
+1. You can have the user logout/login
+2. You can run this "faceless" script
+ ```
+    #/bin/zsh
+    appSSOAgentPID=$(ps -eaf | grep AppSSOAgent.app | grep -v grep | cut -d" " -f 5)
+    kill -9 ${appSSOAgentPID}
+    app-sso -l > /dev/null 2>&1
+```
+
+3. You can show the user a GUI script that I created (found) [here](https://github.com/ScottEKendall/JAMF-Pro-Scripts/blob/main/ForcePlatformSSO/README.md)
+
 
 <img src="https://github.com/ScottEKendall/JAMF-Pro-Scripts/raw/main/ForcePlatformSSO/ForcePlatformSSO.png" width="500" height="400">
 
