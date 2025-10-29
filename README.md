@@ -51,7 +51,7 @@ In order to prepare for Platform SSO deployment, you must perform the following:
 5. [Enable access to the System Settings](#5-enable-access-to-system-settings)
 6. [Make sure touchID is enabled](#6-enable-touchid)
 7. [Deliver the PlatformSSO Configuration Profile](#7-deliver-the-psso-config-profile)
-8. [Run Device Compliancel](#8-run-device-compliance)
+8. [Run Device Compliance](#8-run-device-compliance)
 
 ### Misc Stuff (Notes / Scripts / EAs)
 
