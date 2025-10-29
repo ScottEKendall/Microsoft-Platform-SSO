@@ -68,9 +68,9 @@ In order to prepare for Platform SSO deployment, you must perform the following:
 When setting up the Configuration Profile, you can use either the Microsoft [docs](https://learn.microsoft.com/en-us/intune/intune-service/configuration/use-enterprise-sso-plug-in-macos-with-intune?tabs=prereq-jamf-pro%2Ccreate-profile-jamf-pro) or Jamf Pro [docs](https://learn.jamf.com/en-US/bundle/technical-articles/page/Platform_SSO_for_Microsoft_Entra_ID.html#ariaid-title9).  I have included screenshots of my setup for easier reference:
 
 ![](images/JAMF_Configuration_Policy_Summary.png)
-![](images/JAMF_Configuration_Poicy_SSO_Payload1.png)
-![](images/JAMF_Configuration_Poicy_SSO_Payload2.png)
-![](images/JAMF_Configuration_Poicy_SSO_Payload3.png)
+![](images/JAMF_Configuration_Policy_SSO_Payload1.png)
+![](images/JAMF_Configuration_Policy_SSO_Payload2.png)
+![](images/JAMF_Configuration_Policy_SSO_Payload3.png)
 
 Please note: you must configure an Associate Domain payload, but it does NOT need to have any contents.
 
@@ -101,7 +101,7 @@ The best way to do this is to create groupings and deploy the pSSO to the users 
 
 You will need to make sure thate Sytem Settings -> Users & Groups is available to the users.  Inside of there are options to repair the SSO extension for users
 
-![](JAMF_Users_Groups_Settings.png)
+![](images/JAMF_Users_Groups_Settings.png)
 
 You can use the Repair option to fix any issues found during authentication.
 
@@ -109,7 +109,7 @@ You can use the Repair option to fix any issues found during authentication.
 
 You might need to change your existing Configuration Profiles to allow the Touch ID to be accessed and enabled on systems.  If you are not going to use Secure Enclave as the preferred method for pSSO, you can ignore this setting:
 
-![](JAMF_Touch_ID.png)
+![](images/JAMF_Touch_ID.png)
 
 ### 7. Deliver the pSSO Config Profile ###
 
@@ -138,7 +138,7 @@ _If you do not run this Device Compliance, the user might get the "register your
 
 I have an EA script that I use to determine user registration status and create groups accordingly. The script is multi-user aware and can be found here: https://github.com/ScottEKendall/JAMF-Pro-EAs/blob/main/InTune%20Registration%20Status.sh
 
-![](JAMF_EA_Registration.png)
+![](images/JAMF_EA_Registration.png)
 
 ## Scripts used for Platform SSO ##
 
