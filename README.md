@@ -136,7 +136,7 @@ I have an EA script that I use to determine the status of the User(s) registrati
 
 ## Scripts used for Platform SSO ##
 
-This script can be used to determine Device Compliance for both the SSO Extension and Platform SSO.  If the system is registered with Platform SSO, it still needs to acqire the AAD token.
+This script can be used to determine Device Compliance for both the extensible SSO (SSOe) and Platform SSO. (pSSO).  If the system is registered with Platform SSO, it still needs to acqire the AAD token.
 
 ```#!/bin/bash
 # copyright 2024, JAMF Software, LLC
