@@ -210,6 +210,8 @@ Microsoft Links:
 * Company portal can be found [here](https://learn.microsoft.com/en-us/intune/intune-service/apps/apps-company-portal-macos)
 * SSO Plugin for Apple Devices [here](https://learn.microsoft.com/en-us/entra/identity-platform/apple-sso-plugin)
 * Common pSSO scenerios [here](https://learn.microsoft.com/en-us/intune/intune-service/configuration/platform-sso-scenarios)
+* Troubleshooting Guide [here](https://learn.microsoft.com/en-us/entra/identity/devices/troubleshoot-mac-sso-extension-plugin?tabs=flowchart-ios)
+* Platform SSO Troubleshooting Guide [here](https://learn.microsoft.com/en-us/entra/identity/devices/troubleshoot-macos-platform-single-sign-on-extension?tabs=macOS14)
 
 Other Links:
 
