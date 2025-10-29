@@ -130,7 +130,7 @@ In case the users do not see the notification center prompt (or they dismiss it)
     app-sso -l > /dev/null 2>&1
 ```
 
-3. You can show the user a GUI script that I created (found) [here](https://github.com/ScottEKendall/JAMF-Pro-Scripts/blob/main/ForcePlatformSSO/README.md)
+3. You can show the user a GUI script that I created [here](https://github.com/ScottEKendall/JAMF-Pro-Scripts/blob/main/ForcePlatformSSO/README.md)
 
 
 <img src="https://github.com/ScottEKendall/JAMF-Pro-Scripts/raw/main/ForcePlatformSSO/ForcePlatformSSO.png" width="500" height="400">
