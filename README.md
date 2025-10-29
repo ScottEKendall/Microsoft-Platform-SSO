@@ -52,7 +52,12 @@ In order to prepare for Platform SSO deployment, you must perform the following:
 6. [Make sure touchID is enabled](#enable-touchid)
 7. [Deliver the PlatformSSO Configuration Profile](#deliver-the-psso-config-profile)
 8. [Run Device Compliance from CompanyPorta](#8-device-compliance)
-9. [Changes from Exensible SSO](#changes-from-extensible-sso)
+
+### Misc Stuff (Notes / Scripts / EAs)
+
+* [Extension Attributes](#extension-attributes-ea-for-jamf)
+* [Scripts](#scripts-used-for-platform-sso)
+* [Changes from Extensible SSO](#changes-from-extensible-sso)
 
 ### 1. Company Portal ###
 
@@ -129,7 +134,7 @@ You need to make sure that Device Compliance is run after the user(s) registers 
 
 _If you do not run this Device Compliance, the user might get the "register your device" when trying to authenticate._
 
-## Extended Attributes (EA) for JAMF
+## Extension Attributes (EA) for JAMF
 
 I have an EA script that I use to determine the status of the User(s) registration status and create groups accordingly.... It is multi-user aware. Script can be found [here](https://github.com/ScottEKendall/JAMF-Pro-EAs/blob/main/InTune%20Registration%20Status.sh)
 
