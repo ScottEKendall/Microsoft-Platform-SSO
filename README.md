@@ -195,6 +195,20 @@ echo "no WPJ key found"
 exit 1
 ```
 
+You can test for both (Apple) Platform SSO and (JAMF) Device Compliance in one of two ways:
+
+1.  if ```appleSSO=$(app-sso platform -s | grep "registrationCompleted" | awk -F ":" '{print $2}' | xargs | tr -d ",")``` returns ```true``` then it is apple SSO compliant
+2.  if ```jamfSSO=$("/Library/Application Support/JAMF/Jamf.app/Contents/MacOS/Jamf Conditional Access.app/Contents/MacOS/Jamf Conditional Access" getPSSOStatus | head -n 1)``` returns ```2``` then it is Device Compliant
+
+NOTE: Suposedly the ```/usr/local/jamf/bin/jamfAAD getPSSOStatus``` command _should_ return the sames results as step 2 above, but it doesn't, so it might be best to use the Step 2 command for a results test.
+
+Why Check both?
+
+* Because pSSO and Device Compliance are not the same thing. 
+* pSSO is between macOS and Intune / Entra,
+* Device compliance is between Jamf and Intune / Entra.
+
+
 ## Changes from Extensible SSO ##
 
 When moving away from the (old) extensible SSO method, the "workplace join key" that was present in the Keychain will no longer be there as the functionality of the (new) pSSO has been moved into the Secure Enclave on the mac.  So users will (should) not see this image any longer:
