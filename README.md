@@ -119,7 +119,19 @@ Once you have setup your smart/static group for deployment, you can push it to a
 
 And the user will need to proceed with the registration prompts.
 
-In case the users do not see the notification center prompt (or they dismiss it), it will reappear after a period of time (I think around 15 mins), but you can "force" the prompt to reappear again.  You can either have the user log out and log back in, or [you can use a script I created](https://github.com/ScottEKendall/JAMF-Pro-Scripts/blob/main/ForcePlatformSSO/) that will force the prompt to reappear and show a nice GUI screen so the users (hopefully) don't miss it again.
+In case the users do not see the notification center prompt (or they dismiss it), it will reappear after a period of time (I think around 15 mins), but you can "force" the prompt to reappear again.  These are a few ways that you can accomplish this:
+
+1. You can have the user log out and log back in.
+2. You can run this "faceless" script:
+
+   ```
+    #/bin/zsh
+    appSSOAgentPID=$(ps -eaf | grep AppSSOAgent.app | grep -v grep | cut -d" " -f 5)
+    kill -9 ${appSSOAgentPID}
+    app-sso -l > /dev/null 2>&1
+   ```
+
+3. [you can show the user this GUI script I created](https://github.com/ScottEKendall/JAMF-Pro-Scripts/blob/main/ForcePlatformSSO/) that will force the prompt to reappear so the users (hopefully) don't miss it again.
 
 <img src="https://github.com/ScottEKendall/JAMF-Pro-Scripts/raw/main/ForcePlatformSSO/ForcePlatformSSO.png" width="500" height="400">
 
