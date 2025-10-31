@@ -50,8 +50,9 @@ In order to prepare for Platform SSO deployment, you must perform the following:
 4. [Remove any existing SSO Extension Profile](#4-remove-the-old-sso-extension)
 5. [Enable access to System Settings](#5-enable-access-to-system-settings)
 6. [Make sure Touch ID is enabled](#6-enable-touch-id)
-7. [Deliver the Platform SSO Configuration Profile](#7-deliver-the-psso-config-profile)
-8. [Run Device Compliance](#8-run-device-compliance)
+7. [Configure jamfAAD to use WebView](#7--configure-jamfaad-to-use-webview)
+8. [Deliver the Platform SSO Configuration Profile](#8-deliver-the-psso-config-profile)
+9. [Run Device Compliance](#9-run-device-compliance)
 
 ### Misc Stuff (Notes / Scripts / EAs)
 
@@ -111,7 +112,40 @@ You might need to change your existing Configuration Profiles to allow the Touch
 
 ![](images/JAMF_Touch_ID.png)
 
-### 7. Deliver the pSSO Config Profile ###
+### 7.  Configure jamfAAD to use WebView ###
+
+To avoid issues with browser redirection during the login process, you can configure the JamfAAD app to use WebView instead.  The following policy will perform the following:
+
+* Force jamfAAD to use WebView
+* Eanble jamfAAD logging
+* Settings to recheck for a valid Entra ID
+* Fixes pre-fill authentication failure on first attempt
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>useWKWebView</key>
+	<true/>
+	<key>logPII</key>
+	<string>true</string>
+	<key>OIDCUsePassThroughAuth</key>
+	<true/>
+	<key>OIDCNewPassword</key>
+	<false/>
+	<key>tokenRetryCount</key>
+	<integer>3</integer>
+	<key>tokenRetryWaitTime</key>
+	<integer>42</integer>
+  <key>disableUPNLoginHint</key>
+  <true/>
+</dict>
+</plist>
+```
+Use the domain __com.jamf.management.jamfAAD__ when configuring this Config Profile
+
+### 8. Deliver the pSSO Config Profile ###
 
 Once you have setup your smart/static group for deployment, you can push it to all of the users. Once the profile gets installed on their Mac, they will see the following in their Notification Center.
 
@@ -135,7 +169,7 @@ In case the users do not see the notification center prompt (or they dismiss it)
 
 <img src="https://github.com/ScottEKendall/JAMF-Pro-Scripts/raw/main/ForcePlatformSSO/ForcePlatformSSO.png" width="500" height="400">
 
-## 8. Run Device Compliance ##
+## 9. Run Device Compliance ##
 
 In most cases, the Device Compliance _should_ run after successful Registration, but sometimes it does fail.  If you want to avoid any failures, you need to make sure that Device Compliance is run after the user(s) registers with Platform SSO. You can do this one of two ways:
 
