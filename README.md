@@ -165,7 +165,7 @@ In case the users do not see the notification center prompt (or they dismiss it)
     app-sso -l > /dev/null 2>&1
    ```
 
-3. [you can show the user this GUI script I created](https://github.com/ScottEKendall/JAMF-Pro-Scripts/blob/main/ForcePlatformSSO/) that will force the prompt to reappear so the users (hopefully) don't miss it again.
+3. [You can show the user this GUI script I created](https://github.com/ScottEKendall/JAMF-Pro-Scripts/blob/main/ForcePlatformSSO/) that will force the prompt to reappear so the users (hopefully) don't miss it again.  This script is focus mode aware and will display an appropriate message.
 
 <img src="https://github.com/ScottEKendall/JAMF-Pro-Scripts/raw/main/ForcePlatformSSO/ForcePlatformSSO.png" width="500" height="400">
 
