@@ -84,7 +84,7 @@ You will need to make some changes to your ADE (Automated Device Enrollment) set
 
 ![](images/JAMF_ADE_General.png)
 
-3. In the Configuration Profiles section, make sure that your Platform SSO group is checked, so it will get pushed down during new enrollments
+3. In the Configuration Profiles section, make sure that your Platform SSO profile is checked so it will get pushed down during new enrollments
 
 ![](images/JAMF_ADE_ConfigProfiles.png)
 
@@ -100,7 +100,7 @@ The best way to do this is to create groupings and deploy the pSSO to the users 
 
 ### 5. Enable Access to System Settings ###
 
-You will need to make sure thate Sytem Settings -> Users & Groups is available to the users.  Inside of there are options to repair the SSO extension for users
+You will need to make sure that Sytem Settings -> Users & Groups is available to the users.  Inside of there are options to repair the SSO extension for users
 
 ![](images/JAMF_Users_Groups_Settings.png)
 
@@ -121,33 +121,39 @@ To avoid issues with browser redirection during the login process, you can confi
 * Settings to recheck for a valid Entra ID
 * Fixes pre-fill authentication failure on first attempt
 
-```
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>useWKWebView</key>
-	<true/>
-	<key>logPII</key>
-	<string>true</string>
-	<key>OIDCUsePassThroughAuth</key>
-	<true/>
-	<key>OIDCNewPassword</key>
-	<false/>
-	<key>tokenRetryCount</key>
-	<integer>3</integer>
-	<key>tokenRetryWaitTime</key>
-	<integer>42</integer>
-  <key>disableUPNLoginHint</key>
-  <true/>
-</dict>
-</plist>
-```
-Use the domain __com.jamf.management.jamfAAD__ when configuring this Config Profile
+Create a new Configuration Profile:
+
+Application & Custom Settings > Upload
+
+    Preference Domain: com.jamf.management.jamfAAD
+
+  ```xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+  <plist version="1.0">
+  <dict>
+    <key>useWKWebView</key>
+    <true/>
+    <key>logPII</key>
+    <string>true</string>
+    <key>OIDCUsePassThroughAuth</key>
+    <true/>
+    <key>OIDCNewPassword</key>
+    <false/>
+    <key>tokenRetryCount</key>
+    <integer>3</integer>
+    <key>tokenRetryWaitTime</key>
+    <integer>42</integer>
+    <key>disableUPNLoginHint</key>
+    <true/>
+  </dict>
+  </plist>
+  ```
+
 
 ### 8. Deliver the pSSO Config Profile ###
 
-Once you have setup your smart/static group for deployment, you can push it to all of the users. Once the profile gets installed on their Mac, they will see the following in their Notification Center.
+After you have setup your Smart/Static Group for deployment, you can push it to all of the users. Once the profile gets installed on their Mac, they will see the following in their Notification Center.
 
 ![](https://learn.microsoft.com/en-us/intune/intune-service/configuration/media/platform-sso-macos/platform-sso-macos-registration-required.png)
 
@@ -157,14 +163,12 @@ In case the users do not see the notification center prompt (or they dismiss it)
 
 1. You can have the user log out and log back in.
 2. You can run this "faceless" script:
-
-   ```
-    #/bin/zsh
+    ```sh
+    #/usr/bin/zsh
     appSSOAgentPID=$(ps -eaf | grep AppSSOAgent.app | grep -v grep | cut -d" " -f 5)
     kill -9 ${appSSOAgentPID}
-    app-sso -l > /dev/null 2>&1
-   ```
-
+    /usr/bin/app-sso -l > /dev/null 2>&1
+    ```
 3. [You can show the user this GUI script I created](https://github.com/ScottEKendall/JAMF-Pro-Scripts/blob/main/ForcePlatformSSO/) that will force the prompt to reappear so the users (hopefully) don't miss it again.  This script is focus mode aware and will display an appropriate message.
 
 <img src="https://github.com/ScottEKendall/JAMF-Pro-Scripts/raw/main/ForcePlatformSSO/ForcePlatformSSO.png" width="500" height="400">
@@ -173,7 +177,7 @@ In case the users do not see the notification center prompt (or they dismiss it)
 
 In most cases, the Device Compliance _should_ run after successful Registration, but sometimes it does fail.  If you want to avoid any failures, you need to make sure that Device Compliance is run after the user(s) registers with Platform SSO. You can do this one of two ways:
 
-1.  Deliver a policy that executes the command ```/usr/local/jamf/bin/jamfAAD gatherAADInfo```
+1.  Deliver a policy that executes the command `/usr/local/jamf/bin/jamfAAD gatherAADInfo`
 2.  Have the user run your Register with Entra policy from SS / SS+
 
 ![](images/JAMF_Device%20Compliance.png)
@@ -196,25 +200,25 @@ This script can be used to determine Device Compliance for both the extensible S
 
 You can test for both (Apple) Platform SSO and (JAMF) Device Compliance in one of two ways:
 
-1.  if ```appleSSO=$(app-sso platform -s | grep "registrationCompleted" | awk -F ":" '{print $2}' | xargs | tr -d ",")``` returns ```true``` then it is apple SSO compliant
-2.  if ```jamfSSO=$("/Library/Application Support/JAMF/Jamf.app/Contents/MacOS/Jamf Conditional Access.app/Contents/MacOS/Jamf Conditional Access" getPSSOStatus | head -n 1)``` returns ```2``` then it is Device Compliant
+1.  if `appleSSO=$(app-sso platform -s | grep "registrationCompleted" | awk -F ":" '{print $2}' | xargs | tr -d ",")` returns `true` then it is apple SSO compliant
+2.  if `jamfSSO=$("/Library/Application Support/JAMF/Jamf.app/Contents/MacOS/Jamf Conditional Access.app/Contents/MacOS/Jamf Conditional Access" getPSSOStatus | head -n 1)` returns `2` then it is Device Compliant
 
-NOTE: Suposedly the ```/usr/local/jamf/bin/jamfAAD getPSSOStatus``` command _should_ return the sames results as step 2 above, but it doesn't, so it might be best to use the Step 2 command for a results test.
+NOTE: Suposedly the `/usr/local/jamf/bin/jamfAAD getPSSOStatus` command _should_ return the sames results as step 2 above, but it doesn't, so it might be best to use the Step 2 command for a results test.
 
 Why Check both?
 
 * Because pSSO and Device Compliance are not the same thing. 
-* pSSO is between macOS and Intune / Entra,
-* Device compliance is between Jamf and Intune / Entra.
+* pSSO is between macOS and Entra ID (Proving your identity).
+* Device compliance is between Jamf, Intune, and Entra ID (complying with Conditional Access requirements).
 
 
 ## Changes from Extensible SSO ##
 
-When moving away from the (old) extensible SSO method, the "workplace join key" that was present in the Keychain will no longer be there as the functionality of the (new) pSSO has been moved into the Secure Enclave on the mac.  So users will (should) not see this image any longer:
+When moving away from the (old) extensible SSO method, the "workplace join key" that was present in the Keychain will no longer be there as the functionality of the (new) pSSO has been moved into the Secure Enclave on the mac.  So users will (should) **not** see this image any longer:
 
 ![](images/WPJKeychain.png)
 
-If you have any Smart/Static Groups or EAs that look for the WPJ Key in the users keychain, you need to change your logic to use the ```app-sso platform -s``` terminal command to determine SSO status.
+If you have any Smart/Static Groups or EAs that look for the WPJ Key in the users keychain, you need to change your logic to use the `app-sso platform -s` terminal command to determine SSO status.
 
 ## Reference Documentation and Resources
 
