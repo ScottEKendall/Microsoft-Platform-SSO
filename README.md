@@ -203,6 +203,10 @@ I am trying to stick with the company "official" docs as much as possible, but I
 * [Troubleshooting the Microsoft Enterprise SSO Extension plugin on Apple devices](https://learn.microsoft.com/en-us/entra/identity/devices/troubleshoot-mac-sso-extension-plugin)
 * [End-to-end guide to get started with macOS endpoints](https://learn.microsoft.com/en-gb/intune/solutions/end-to-end-guides/macos-endpoints-get-started?tabs=psso)
 
+### FileWave Documentation
+
+* [Microsoft Enterprise Platform Single Sign-on for macOS](https://kb.filewave.com/books/macos/page/microsoft-enterprise-platform-single-sign-on-for-macos)
+
 ### Other Resources
 
 * [IntuneMacAdmins - Configure MacOS Platform SSO](https://www.intunemacadmins.com/complete-guide-macos-deployment/configure_macos_platform_sso/)
