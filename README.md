@@ -56,6 +56,7 @@ In order to prepare for Platform SSO deployment, you must perform the following:
 
 ### Misc Stuff (Notes / Scripts / EAs)
 
+* [Users running Focus Mode](#focus-mode)
 * [Extension Attributes](#extension-attributes-ea-for-jamf)
 * [Scripts](#scripts-used-for-platform-sso)
 * [Changes from Extensible SSO](#changes-from-extensible-sso)
@@ -183,6 +184,29 @@ In most cases, the Device Compliance _should_ run after successful Registration,
 ![](images/JAMF_Device%20Compliance.png)
 
 _If you do not run this Device Compliance, the user might get the "register your device" when trying to authenticate._
+
+## Focus Mode ##
+
+If users keep themselves in focus mode, they will never receive the pSSO Registration screen.  There are a couple of ways to handle this:
+
+* Here is an EA tha can be used so that you can setup Smart Groups and possibily take action based on the members of the group (targeted email / display prompts / etc). 
+
+
+```
+#!/bin/zsh --no-rcs
+LOGGED_IN_USER=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
+FOCUS_FILE="/Users/${LOGGED_IN_USER}/Library/DoNotDisturb/DB/Assertions.json"
+results="Off"
+if [[ -e $FOCUS_FILE ]]; then
+    retval=$(plutil -extract data.0.storeAssertionRecords.0.assertionDetails.assertionDetailsModeIdentifier raw -o - $FOCUS_FILE | grep -ic 'com.apple.')
+    [[ $retval == "1" ]] && results="On" || results="Off"
+else
+    results="Off"
+fi
+echo "<results>$results</results>"
+```
+
+* For a GUI version that is focus aware, you can use this script [found here](https://github.com/ScottEKendall/JAMF-Pro-Scripts/blob/main/ForcePlatformSSO/)
 
 ## Extension Attributes (EA) for Jamf Pro
 
