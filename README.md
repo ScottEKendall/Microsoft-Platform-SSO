@@ -241,6 +241,10 @@ I am trying to stick with the company "official" docs as much as possible, but I
 
 * [Microsoft Enterprise Platform Single Sign-on for macOS](https://kb.filewave.com/books/macos/page/microsoft-enterprise-platform-single-sign-on-for-macos)
 
+### Workspace One
+
+* [Bryan D Garmon / How to configure pSSO & Workspace One](https://www.aftersixcomputers.com/how-to-configure-apple-platform-sso-using-omnissa-workspace-one-uem/)
+
 ### Other Resources
 
 * [IntuneMacAdmins - Configure MacOS Platform SSO](https://www.intunemacadmins.com/complete-guide-macos-deployment/configure_macos_platform_sso/)
