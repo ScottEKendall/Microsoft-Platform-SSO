@@ -164,7 +164,7 @@ In case the users do not see the notification center prompt (or they dismiss it)
 1. You can have the user log out and log back in.
 2. You can run this "faceless" script:
     ```sh
-    #/usr/bin/zsh
+    #!/bin/zsh
     appSSOAgentPID=$(ps -eaf | grep AppSSOAgent.app | grep -v grep | cut -d" " -f 5)
     kill -9 ${appSSOAgentPID}
     /usr/bin/app-sso -l > /dev/null 2>&1
