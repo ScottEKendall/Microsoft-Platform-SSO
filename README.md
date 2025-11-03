@@ -150,7 +150,9 @@ Application & Custom Settings > Upload
   </dict>
   </plist>
   ```
+The JAMF docs for this can be found here:
 
+[Creating a Policy Directing Users to Register Mac Computers with Microsoft Entra ID](https://learn.jamf.com/en-US/bundle/technical-paper-microsoft-intune-current/page/Creating_a_Policy_Directing_Users_to_Register_Mac_Computers_with_Azure_Active_Directory.html)
 
 ### 8. Deliver the pSSO Config Profile ###
 
@@ -203,7 +205,7 @@ if [[ -e $FOCUS_FILE ]]; then
 else
     results="Off"
 fi
-echo "<results>$results</results>"
+echo "<result>$results</result>"
 ```
 
 * For a GUI version that is focus aware, you can use this script [found here](https://github.com/ScottEKendall/JAMF-Pro-Scripts/blob/main/ForcePlatformSSO/)
