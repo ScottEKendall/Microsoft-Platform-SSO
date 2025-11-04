@@ -57,6 +57,7 @@ In order to prepare for Platform SSO deployment, you must perform the following:
 ### Misc Stuff (Notes / Scripts / EAs)
 
 * [Users running Focus Mode](#focus-mode)
+* [Important note about Secure Enclave](#important-note-when-use-secure-enclave)
 * [Extension Attributes](#extension-attributes-ea-for-jamf)
 * [Scripts](#scripts-used-for-platform-sso)
 * [Changes from Extensible SSO](#changes-from-extensible-sso)
@@ -208,7 +209,30 @@ fi
 echo "<result>$results</result>"
 ```
 
-* For a GUI version that is focus aware, you can use this script [found here](https://github.com/ScottEKendall/JAMF-Pro-Scripts/blob/main/ForcePlatformSSO/)
+  For a GUI version that is focus aware, you can use this script [found here](https://github.com/ScottEKendall/JAMF-Pro-Scripts/blob/main/ForcePlatformSSO/)
+  
+## Important note when using Secure Enclave ##
+
+If you are using the Secure Enclave feature for pSSO, please observe this following note:
+
+  _There is no option for password fallback while authenticating with User Secure Enclave Key when UserSecureEnclaveKeyBiometricPolicy is enabled. Therefore, users won't be able to authenticate to Microsoft Entra ID if they don't have Touch ID biometrics available._
+
+This is taken from this [MS document page](https://learn.microsoft.com/en-us/entra/identity/devices/macos-psso#microsoft-platform-sso-usersecureenclavekeybiometricpolicy)
+
+If your users don't have touch ID on their machines, you should not be using Secure Enclave as the authentication method.  If you have a mixed environment, you have two choices:
+
+1.  Enable password authentication for all users, thus not needing Touch ID.
+2.  Seperate your users into Touch ID (Enabled) and no Touch ID and roll out different pSSO policies based on Touch ID hardware.
+
+  Here is an example EA that can be used to test for touch ID
+
+  ```xml
+  #!/bin/zsh
+  # Determine if Touch ID hardware is pesent
+  result=$(bioutil -r | grep "Biometrics for unlock" | awk -F ":" '{print $2}' | xargs )
+  [[ $result == 1 ]] && retval="Present" || retval="No Hardware"
+  echo "<result>$retval</result>"
+  ```
 
 ## Extension Attributes (EA) for Jamf Pro
 
