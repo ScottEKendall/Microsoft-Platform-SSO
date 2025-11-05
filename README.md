@@ -215,7 +215,9 @@ echo "<result>$results</result>"
 
 If you are using the Secure Enclave feature for pSSO, please observe this following note:
 
-  _There is no option for password fallback while authenticating with User Secure Enclave Key when UserSecureEnclaveKeyBiometricPolicy is enabled. Therefore, users won't be able to authenticate to Microsoft Entra ID if they don't have Touch ID biometrics available._
+> _There is no option for password fallback while authenticating with User Secure Enclave Key when
+> UserSecureEnclaveKeyBiometricPolicy is enabled. Therefore, users won't be able to authenticate to
+> Microsoft Entra ID if they don't have Touch ID biometrics available._
 
 This is taken from this [MS document page](https://learn.microsoft.com/en-us/entra/identity/devices/macos-psso#microsoft-platform-sso-usersecureenclavekeybiometricpolicy)
 
