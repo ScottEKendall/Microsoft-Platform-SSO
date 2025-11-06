@@ -302,6 +302,10 @@ I am trying to stick with the company "official" docs as much as possible, but I
 * [Platform SSO for MacOS](https://trusted.jamf.com/docs/platform-sso-for-macos)
 * [Okta & Jamf Pro PSSO Simplified Setup for macOS 26 Setup Guide](https://trusted.jamf.com/docs/technical-documentation-template)
 
+### Simple MDM ###
+
+* [SimpleMDM - How to configure Platform Single Sign-on](https://simplemdm.com/blog/how-to-configure-platform-single-sign-on/)
+  
 ### Workspace One
 
 * [Bryan D Garmon / How to configure pSSO & Workspace One](https://www.aftersixcomputers.com/how-to-configure-apple-platform-sso-using-omnissa-workspace-one-uem/)
@@ -309,6 +313,6 @@ I am trying to stick with the company "official" docs as much as possible, but I
 ### Other Resources
 
 * [IntuneMacAdmins - Configure MacOS Platform SSO](https://www.intunemacadmins.com/complete-guide-macos-deployment/configure_macos_platform_sso/)
-* [SimpleMDM - How to configure Platform Single Sign-on](https://simplemdm.com/blog/how-to-configure-platform-single-sign-on/)
+
 * [Aaron David Polley - How To Hold macOS User Identity in 2025](https://aarondavidpolley.com/how-to-hold-macos-user-identity-in-2025/)
 * [benwhitis\/Jamf_Conditional_Access - MacOS Conditional Access Best Practices](https://github.com/benwhitis/Jamf_Conditional_Access/wiki/MacOS-Conditional-Access-Best-Practices)
