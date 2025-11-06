@@ -282,7 +282,7 @@ I am trying to stick with the company "official" docs as much as possible, but I
 
 ### Jamf Pro Documentation
 * [Deploying macOS Platform SSO for Microsoft Entra ID with Jamf Pro](https://learn.jamf.com/en-US/bundle/technical-articles/page/Platform_SSO_for_Microsoft_Entra_ID.html)
-  * [Deploying a Platform Single Sign-on Configuration Profile](https://learn.jamf.com/en-US/bundle/technical-articles/page/Platform_SSO_for_Microsoft_Entra_ID.html#ariaid-title9)
+* [Deploying a Platform Single Sign-on Configuration Profile](https://learn.jamf.com/en-US/bundle/technical-articles/page/Platform_SSO_for_Microsoft_Entra_ID.html#ariaid-title9)
 
 ### Microsoft Documentation
 
@@ -296,6 +296,11 @@ I am trying to stick with the company "official" docs as much as possible, but I
 ### FileWave Documentation
 
 * [Microsoft Enterprise Platform Single Sign-on for macOS](https://kb.filewave.com/books/macos/page/microsoft-enterprise-platform-single-sign-on-for-macos)
+
+### Okta Setup ###
+
+* [Platform SSO for MacOS](https://trusted.jamf.com/docs/platform-sso-for-macos)
+* [Okta & Jamf Pro PSSO Simplified Setup for macOS 26 Setup Guide](https://trusted.jamf.com/docs/technical-documentation-template)
 
 ### Workspace One
 
