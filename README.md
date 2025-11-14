@@ -108,7 +108,7 @@ You will need to make sure that Sytem Settings -> Users & Groups is available to
 
 You can use the Repair option to fix any issues found during authentication.
 
-Direct link to System Settings -> Users & Groups -> Current User's info pane. Useful for pointing users to repair registration or authenticate again if tokens are expired.
+You can link directly to the current user's info pane in System Settings -> Users & Groups. This is useful for pointing users to repair registration or authenticate again if tokens are expired and could be incorporated into a Self Service policy or other scripting:
 ```
 #!/bin/zsh
 username=$(scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }')
