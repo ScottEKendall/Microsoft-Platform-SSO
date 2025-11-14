@@ -108,6 +108,13 @@ You will need to make sure that Sytem Settings -> Users & Groups is available to
 
 You can use the Repair option to fix any issues found during authentication.
 
+Direct link to System Settings -> Users & Groups -> Current User's info pane. Useful for pointing users to repair registration or authenticate again if tokens are expired
+```
+#!/bin/zsh
+username=$(scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }')
+open "x-apple.systempreferences:com.apple.Users-Groups-Settings.extension?showinfo*user:${username}"
+```
+
 ### 6. Enable Touch ID ###
 
 You might need to change your existing Configuration Profiles to allow the Touch ID to be accessed and enabled on systems.  If you are not going to use Secure Enclave as the preferred method for pSSO, you can ignore this setting:
