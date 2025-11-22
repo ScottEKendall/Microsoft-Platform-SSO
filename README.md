@@ -316,3 +316,8 @@ I am trying to stick with the company "official" docs as much as possible, but I
 
 * [Aaron David Polley - How To Hold macOS User Identity in 2025](https://aarondavidpolley.com/how-to-hold-macos-user-identity-in-2025/)
 * [benwhitis\/Jamf_Conditional_Access - MacOS Conditional Access Best Practices](https://github.com/benwhitis/Jamf_Conditional_Access/wiki/MacOS-Conditional-Access-Best-Practices)
+
+
+If you find my work useful, please consider a donation to the caffeine fund!
+
+<a href="https://www.buymeacoffee.com/scottekendall" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
