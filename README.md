@@ -56,6 +56,7 @@ In order to prepare for Platform SSO deployment, you must perform the following:
 
 ### Misc Stuff (Notes / Scripts / EAs)
 
+* [Check the logs for issues](#checking-the-logs)
 * [Users running Focus Mode](#focus-mode)
 * [Important note about Secure Enclave](#important-note-when-use-secure-enclave)
 * [Extension Attributes](#extension-attributes-ea-for-jamf)
@@ -235,6 +236,16 @@ If your users don't have touch ID on their machines, you should not be using Sec
   [[ $result == 1 ]] && retval="Present" || retval="No Hardware"
   echo "<result>$retval</result>"
   ```
+
+## Checking the logs ##
+
+If you run into trouble with implementation of pSSO, one of the first things to check is the system logs.  You can do that with the 'predicate' command which can be used to filter the logs:
+
+```/usr/bin/log stream --info --predicate 'process=="mdmclient" AND composedMessage CONTAINS "Processing server request: DeclarativeManagement for" AND composedMessage```
+
+Here is a utility that is MDM Agnostic and will constantly monitor the logs for issues:
+
+https://github.com/microsoft/shell-intune-samples/tree/master/macOS/Tools/mdmCheckinMonitor
 
 ## Extension Attributes (EA) for Jamf Pro
 
