@@ -65,7 +65,7 @@ In order to prepare for Platform SSO deployment, you must perform the following:
 
 ### 1. Company Portal ###
 
-* You need to install v5.2404.0 or newer in your prestage enrollment (for new enrollments) or install via policy (to existing users).  Here's a direct download for the Company Portal installer: https://go.microsoft.com/fwlink/?linkid=853070
+* You need to install v5.2410.1 or newer in your prestage enrollment (for new enrollments) or install via policy (to existing users).  Here's a direct download for the Company Portal installer: https://go.microsoft.com/fwlink/?linkid=853070
 
 ### 2. Create pSSO Configuration Profile ###
 
@@ -193,7 +193,7 @@ _If you do not run this Device Compliance, the user might get the "register your
 
 If users keep themselves in focus mode, they will never receive the pSSO Registration screen.  There are a couple of ways to handle this:
 
-* Here is an EA tha can be used so that you can setup Smart Groups and possibily take action based on the members of the group (targeted email / display prompts / etc). 
+* Here is an EA tha can be used so that you can setup Smart Groups and possibility take action based on the members of the group (targeted email / display prompts / etc). 
 
 
 ```
@@ -231,7 +231,7 @@ If your users don't have touch ID on their machines, you should not be using Sec
 
   ```xml
   #!/bin/zsh
-  # Determine if Touch ID hardware is pesent
+  # Determine if Touch ID hardware is present
   result=$(bioutil -r | grep "Biometrics for unlock" | awk -F ":" '{print $2}' | xargs )
   [[ $result == 1 ]] && retval="Present" || retval="No Hardware"
   echo "<result>$retval</result>"
