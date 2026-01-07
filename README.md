@@ -168,11 +168,15 @@ In case the users do not see the notification center prompt (or they dismiss it)
 
 1. You can have the user log out and log back in.
 2. You can run this "faceless" script:
-    ```sh
-    #!/bin/zsh
-    appSSOAgentPID=$(ps -eaf | grep AppSSOAgent.app | grep -v grep | cut -d" " -f 5)
-    kill -9 ${appSSOAgentPID}
-    /usr/bin/app-sso -l > /dev/null 2>&1
+    ```runAsUser() { launchctl asuser $currentUID sudo -u $currentUser "$@" }
+pssoCheckStatus() { runAsUser app-sso platform -s | awk -F'.*" : "?|"|,' '/"state"/ {print $2}' }
+
+if [[ -z $(pssoCheckStatus) ]]; then
+	echo "Plugin not initialized, reloading AppSSOAgent"
+	pkill AppSSOAgent
+	sleep 1
+	runAsUser app-sso -l
+fi
     ```
 3. [You can show the user this GUI script I created](https://github.com/ScottEKendall/JAMF-Pro-Scripts/blob/main/ForcePlatformSSO/) that will force the prompt to reappear so the users (hopefully) don't miss it again.  This script is focus mode aware and will display an appropriate message.
 
