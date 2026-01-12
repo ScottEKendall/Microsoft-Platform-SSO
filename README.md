@@ -190,6 +190,18 @@ In case the users do not see the notification center prompt (or they dismiss it)
 
 <img src="https://github.com/ScottEKendall/JAMF-Pro-Scripts/raw/main/ForcePlatformSSO/ForcePlatformSSO.png" width="500" height="400">
 
+
+4.  Another alternative script that you can use is called P.S.E.U.D.O. developed by Macjutsu:  This script will also enforce the TouchID (if available) as well as enforce the Platform registration as well.
+
+> P.S.E.U.D.O. (or just pseudo) is an open source script that provides administrators with a solution to enforce Platform SSO registration and/or Touch ID enablement. Deployed using a single script and a required PPPC configuration profile, pseudo leverages swiftDialog and the macOS System Event, System Event UI, and Accessibility frameworks to ensure that users are registering with Platform SSO and/or enabling Touch ID.
+
+https://github.com/Macjutsu/pseudo
+
+1.  Another neat little trick that you can do is to automatically populate the Autofill selection for Company Portal In the General > AutoFill & Password section of System Settings.  This takes advantage of Apple's PluginKit architecture:
+
+![](imnages/../images/AutoFill_Passwords_screen.png)
+https://github.com/ScottEKendall/Microsoft-Platform-SSO/blob/main/scripts/Enforce%20Portal%20AutoFill.sh
+
 ## 9. Run Device Compliance ##
 
 In most cases, the Device Compliance _should_ run after successful Registration, but sometimes it does fail.  If you want to avoid any failures, you need to make sure that Device Compliance is run after the user(s) registers with Platform SSO. You can do this one of two ways:
