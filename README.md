@@ -111,9 +111,19 @@ You can use the Repair option to fix any issues found during authentication.
 
 ### 6. Enable Touch ID ###
 
-You might need to change your existing Configuration Profiles to allow the Touch ID to be accessed and enabled on systems.  If you are not going to use Secure Enclave as the preferred method for pSSO, you can ignore this setting:
+On systems that have TouchID, you might need to change your existing Configuration Profiles to allow the Touch ID to be accessed and enabled on systems.  If you are not going to use Secure Enclave as the preferred method for pSSO, you can ignore this setting:
 
 ![](images/JAMF_Touch_ID.png)
+
+I have a working EA that will determine the status of TouchID on the systems.  
+
+https://github.com/ScottEKendall/JAMF-Pro-EAs/blob/main/TouchID%20Status.sh
+
+>IMPORTANT!  You might need to have two pSSO config profiles, one that will support TouchID and one for systems without TouchID
+
+>You will need to change the `Authentication Method` in the Platform SSO to use "Password" instead of "Use Secure Enclave Key"
+
+>![](./images/JAMF_Configuration_Policy_SSO_Payload4.png)
 
 ### 7.  Configure jamfAAD to use WebView ###
 
@@ -186,7 +196,7 @@ In case the users do not see the notification center prompt (or they dismiss it)
 	  runAsUser app-sso -l
   fi
   ```
-3. [You can show the user this GUI script I created](https://github.com/ScottEKendall/JAMF-Pro-Scripts/blob/main/ForcePlatformSSO/) that will force the prompt to reappear so the users (hopefully) don't miss it again.  This script is focus mode aware and will display an appropriate message.
+3. [You can show the user this GUI script I created](https://github.com/ScottEKendall/JAMF-Pro-Scripts/blob/main/ForcePlatformSSO/) that will force the prompt to reappear so the users (hopefully) don't miss it again.  This script is focus mode aware and will display an appropriate message.  You can optionally check for TouchID registration and it will also auto-enable the Password & Autofill option for Company Portal,
 
 <img src="https://github.com/ScottEKendall/JAMF-Pro-Scripts/raw/main/ForcePlatformSSO/ForcePlatformSSO.png" width="500" height="400">
 
