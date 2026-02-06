@@ -119,11 +119,13 @@ I have a working EA that will determine the status of TouchID on the systems.
 
 https://github.com/ScottEKendall/JAMF-Pro-EAs/blob/main/TouchID%20Status.sh
 
->IMPORTANT!  You might need to have two pSSO config profiles, one that will support TouchID and one for systems without TouchID
-
+>IMPORTANT!  According to MS documentation, you might need to have two pSSO config profiles, one that will support TouchID and one for systems without TouchID.  
+>
 >You will need to change the `Authentication Method` in the Platform SSO to use "Password" instead of "Use Secure Enclave Key"
-
->![](./images/JAMF_Configuration_Policy_SSO_Payload4.png)
+>
+>![](images/JAMF_Configuration_Policy_SSO_Payload4.png)
+>
+>I have heard reports of admins not needing to do this though..one Config Profile seems to work OK for both TouchID & password only macs.
 
 ### 7.  Configure jamfAAD to use WebView ###
 
@@ -179,6 +181,10 @@ In case the users do not see the notification center prompt (or they dismiss it)
 1. You can have the user log out and log back in.
 2. You can run this "faceless" script:
   ```
+#!/bin/sh
+currentUser=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
+currentUID=$(id -u "$currentUser")
+
   runAsUser() 
   { 
     launchctl asuser $currentUID sudo -u $currentUser "$@" 
@@ -196,7 +202,7 @@ In case the users do not see the notification center prompt (or they dismiss it)
 	  runAsUser app-sso -l
   fi
   ```
-3. [You can show the user this GUI script I created](https://github.com/ScottEKendall/JAMF-Pro-Scripts/blob/main/ForcePlatformSSO/) that will force the prompt to reappear so the users (hopefully) don't miss it again.  This script is focus mode aware and will display an appropriate message.  You can optionally check for TouchID registration and it will also auto-enable the Password & Autofill option for Company Portal,
+1. [You can show the user this GUI script I created](https://github.com/ScottEKendall/JAMF-Pro-Scripts/blob/main/ForcePlatformSSO/) that will force the prompt to reappear, so the users (hopefully) don't miss it again.  This script is focus mode aware and will display an appropriate message.  You can optionally check for TouchID registration and it will also auto-enable the Password & Autofill option for Company Portal.
 
 <img src="https://github.com/ScottEKendall/JAMF-Pro-Scripts/raw/main/ForcePlatformSSO/ForcePlatformSSO.png" width="500" height="400">
 
@@ -234,12 +240,9 @@ If users keep themselves in focus mode, they will never receive the pSSO Registr
 #!/bin/zsh --no-rcs
 LOGGED_IN_USER=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
 FOCUS_FILE="/Users/${LOGGED_IN_USER}/Library/DoNotDisturb/DB/Assertions.json"
-results="Off"
-if [[ -e $FOCUS_FILE ]]; then
-    retval=$(plutil -extract data.0.storeAssertionRecords.0.assertionDetails.assertionDetailsModeIdentifier raw -o - $FOCUS_FILE | grep -ic 'com.apple.')
-    [[ $retval == "1" ]] && results="On" || results="Off"
-else
-    results="Off"
+local results="off"
+if [[ -f "$FOCUS_FILE" ]] && grep -q '"storeAssertionRecords"' "$FOCUS_FILE" 2>/dev/null; then
+    results="on"
 fi
 echo "<result>$results</result>"
 ```
@@ -264,11 +267,48 @@ If your users don't have touch ID on their machines, you should not be using Sec
   Here is an example EA that can be used to test for touch ID
 
   ```xml
-  #!/bin/zsh
-  # Determine if Touch ID hardware is present
-  result=$(bioutil -r | grep "Biometrics for unlock" | awk -F ":" '{print $2}' | xargs )
-  [[ $result == 1 ]] && retval="Present" || retval="No Hardware"
-  echo "<result>$retval</result>"
+ #!/bin/zsh
+LOGGED_IN_USER=$( echo "show State:/Users/ConsoleUser" | scutil | awk '/Name :/ { print $3 }' )
+USER_UID=$( id -u "${LOGGED_IN_USER}" )
+declare retval=""
+function runAsUser () 
+{  
+    launchctl asuser "$USER_UID" sudo -iu "$LOGGED_IN_USER" "$@"
+}
+
+function checkTouchID() {
+    local hw="Absent"
+    retval="$hw"
+    local enrolled="false"
+    local bioCount="0"
+    # --- Detect Touch ID–capable hardware (internal or external) ---
+    bioOutput=$(ioreg -l 2>/dev/null)
+
+    # Check for the device entry indicating hardware presence
+    if [[ $bioOutput == *"+-o AppleBiometricSensor"* ]]; then
+        hw="Present"
+    else
+        # Fallback: Parse IOKitDiagnostics for class instance count
+        if [[ $bioOutput =~ '"AppleBiometricSensor"=([0-9]+)' && ${match[1]} -gt 0 ]]; then
+            hw="Present"
+        # Fallback: Magic Keyboard with Touch ID
+        elif system_profiler SPUSBDataType 2>/dev/null | grep -q "Magic Keyboard.*Touch ID"; then
+            hw="Present"
+        fi
+    fi
+
+    if [[ "${hw}" == "Present" ]]; then
+        # Enrollment check
+
+        bioCount=$(runAsUser bioutil -c 2>/dev/null | awk '/biometric template/{print $3}' | grep -Eo '^[0-9]+$' || echo "0")
+        [[ "${bioCount}" -gt 0 ]] && enrolled="true"
+
+        [[ "${enrolled}" == "true" ]] && retval="Enabled" || retval="Not enabled"
+    fi
+}
+
+checkTouchID
+echo "<result>$retval</result>"
   ```
 
 ## Checking the logs ##
