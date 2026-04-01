@@ -78,6 +78,11 @@ When setting up the Configuration Profile, you can use either the Microsoft [doc
 
 Please note: you must configure an Associate Domain payload, but it does NOT need to have any contents.
 
+>Update 04-01-2026 - If you want to use a different Shortname (such as first.name), you can substitute ```com.apple.PlatformSSO.AccountShortName``` in the ShortName field, it will give you just the username\
+>
+>![](./images/PSSO%20Multiple%20User%20Setup.png)
+
+![](./JAMF_ADE_ConfigProfiles.png)
 ### 3. Configure ADE for Simplified Setup ###
 
 You will need to make some changes to your ADE (Automated Device Enrollment) setup to take advantage of pSSO:
