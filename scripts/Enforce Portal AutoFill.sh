@@ -10,7 +10,7 @@
 script_version="1.0.2"
 
 LOGGED_IN_USER=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
-LOG_FILE=$(/var/logs/PortalAutofill.log)
+LOG_FILE="/var/logs/PortalAutofill.log"
 USER_DIR=$( dscl . -read /Users/${LOGGED_IN_USER} NFSHomeDirectory | awk '{ print $2 }' )
 USER_UID=$(id -u "$LOGGED_IN_USER")
 APP_TO_CHECK="/Applications/Company Portal.app"
