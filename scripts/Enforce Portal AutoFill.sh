@@ -5,9 +5,9 @@
 #  1.0.0 – Initial helper (Microsoft sample)
 #  1.0.1 – Added console-user lookup rather than $USER.
 #  1.0.2 – Added logging and version banner.
-#  1,0.3 - Added missing LOG_FILE variable
+#  1.0.3 - Added missing LOG_FILE variable and created LOG_DIR at the beginning
 
-script_version="1.0.2"
+script_version="1.0.3"
 
 LOGGED_IN_USER=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
 LOG_FILE="/var/logs/PortalAutofill.log"
@@ -22,6 +22,25 @@ APP_EXTENSIONS=(
 function admin_user ()
 {
     [[ $UID -eq 0 ]] && return 0 || return 1
+}
+
+function create_log_directory ()
+{
+    # Ensure that the log directory and the log files exist. If they
+    # do not then create them and set the permissions.
+    #
+    # RETURN: None
+
+	# If the log directory doesn't exist - create it and set the permissions (using zsh parameter expansion to get directory)
+    if admin_user; then
+        LOG_DIR=${LOG_FILE%/*}
+        [[ ! -d "${LOG_DIR}" ]] && /bin/mkdir -p "${LOG_DIR}"
+        /bin/chmod 755 "${LOG_DIR}"
+
+        # If the log file does not exist - create it and set the permissions
+        [[ ! -f "${LOG_FILE}" ]] && /usr/bin/touch "${LOG_FILE}"
+        /bin/chmod 644 "${LOG_FILE}"
+    fi
 }
 
 function logMe () 
@@ -62,6 +81,7 @@ function checkForFile ()
 
 # Make sure that the app exists before checking for extensions
 
+create_log_directory
 checkForFile $APP_TO_CHECK
 
 # check each extension listed in the array to see if it is enabled in PlugKit

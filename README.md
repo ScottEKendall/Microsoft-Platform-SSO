@@ -371,6 +371,8 @@ When moving away from the (old) extensible SSO method, the "workplace join key" 
 
 If you have any Smart/Static Groups or EAs that look for the WPJ Key in the users keychain, you need to change your logic to use the `app-sso platform -s` terminal command to determine SSO status.
 
+>NOTE: The Verify Device Compliance via Extensible SSO and Platform SSO.sh script reports on the WPJ key in the Keychain. Those are no longer created anymore.
+
 ## Reference Documentation and Resources
 
 I am trying to stick with the company "official" docs as much as possible, but I do have an "other" section, and I will try to have comprehensive guides if possible.
