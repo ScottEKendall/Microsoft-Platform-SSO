@@ -67,7 +67,7 @@ In order to prepare for Platform SSO deployment, you must perform the following:
 
 ### 1. Company Portal ###
 
-* You need to install v5.2604.0 or newer in your prestage enrollment (for new enrollments) or install via policy (to existing users).  Here's a direct download for the Company Portal installer: https://res.public.onecdn.static.microsoft/mro1cdnstorage/4B2D7701-0A4F-49C8-B4CB-0C2D4043F51F/MacAutoupdate/CompanyPortal_5.2604.0-Upgrade.pkg
+* You need to install v5.2604.1 or newer in your prestage enrollment (for new enrollments) or install via policy (to existing users).  Here's a direct download for the Company Portal installer: https://go.microsoft.com/fwlink/?linkid=853070
 
 ### 2. Create pSSO Configuration Profile ###
 
