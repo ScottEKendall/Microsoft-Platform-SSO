@@ -415,9 +415,9 @@ I am trying to stick with the company "official" docs as much as possible, but I
 ### Other Resources
 
 * [IntuneMacAdmins - Configure MacOS Platform SSO](https://www.intunemacadmins.com/complete-guide-macos-deployment/configure_macos_platform_sso/)
-
 * [Aaron David Polley - How To Hold macOS User Identity in 2025](https://aarondavidpolley.com/how-to-hold-macos-user-identity-in-2025/)
 * [benwhitis\/Jamf_Conditional_Access - MacOS Conditional Access Best Practices](https://github.com/benwhitis/Jamf_Conditional_Access/wiki/MacOS-Conditional-Access-Best-Practices)
+* [David Crosby - macOS 26 Tahoe: Simplified Setup for Platform SSO](https://github.com/david-crosby/jamf-pro-psso-guide/blob/main/tahoe-setup-guide.md)
 
 
 If you find my work useful, please consider a donation to the caffeine fund!
