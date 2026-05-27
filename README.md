@@ -131,7 +131,7 @@ On systems that have TouchID, you might need to change your existing Configurati
 
 I have a working EA that will determine the status of TouchID on the systems.  
 
-https://github.com/ScottEKendall/JAMF-Pro-EAs/blob/main/TouchID%20Status.sh
+https://github.com/ScottEKendall/JAMF-Pro-EAs/blob/main/Touch%20ID%20Status.sh
 
 >IMPORTANT!  According to MS documentation, you might need to have two pSSO config profiles, one that will support TouchID and one for systems without TouchID.  
 >
