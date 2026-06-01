@@ -429,7 +429,7 @@ I am trying to stick with the company "official" docs as much as possible, but I
 * [Troubleshooting the Microsoft Enterprise SSO Extension plugin on Apple devices](https://learn.microsoft.com/en-us/entra/identity/devices/troubleshoot-mac-sso-extension-plugin)
 * [End-to-end guide to get started with macOS endpoints](https://learn.microsoft.com/en-gb/intune/solutions/end-to-end-guides/macos-endpoints-get-started?tabs=psso)
 
-## InTune Customer Success ##
+### InTune Customer Success ###
 
 * [New Platform SSO with registration during Automated Device Enrollment on macOS](https://techcommunity.microsoft.com/blog/intunecustomersuccess/new-platform-sso-with-registration-during-automated-device-enrollment-on-macos/4519846)
 
