@@ -42,7 +42,41 @@ For most modern deployments, Platform SSO is the recommended choice for macOS de
 
 --- End AI Generated Overview ----
 
-### Jamf Pro Configuration ###
+## Why is Microsoft making this change? ##
+
+  •	Microsoft is pushing organization-managed Macs toward the new Platform Single Sign-On (Platform SSO or PSSO) configuration to drastically improve corporate security, eliminate traditional password management headaches, and achieve Zero Trust goals across non-Windows hardware.
+
+  •	This shift is heavily driven by the industry-wide depreciation of old, fragile Active Directory (AD) binding methods, moving instead toward native, cloud-first device identity architectures.
+
+### **Eliminating Phishing and Password Fatigue**
+---------------------------------------------
+
+•	Phishing-Resistant MFA: PSSO leverages Apple's built-in Secure Enclave hardware to provision cryptographic keys. This allows Microsoft to issue device-bound passkeys that cannot be intercepted by traditional phishing attacks.
+
+•	True Passwordless Login: Users can leverage Touch ID or hardware keys (like YubiKeys) directly at the macOS login window. This mimics the passwordless "Windows Hello for Business" security model on Windows endpoints.
+
+•	Drastic Prompt Reduction: Once a user authenticates at the hardware level, PSSO generates a primary refresh token. This automatically signs them into Microsoft 365 web apps (Safari, Edge, Chrome) and native apps like Teams and Outlook without throwing endless authentication prompts.
+
+
+### **Modern Identity and Password Synchronization**
+---------------------------------------------
+
+
+•	Replacing Legacy AD Binding: Binding Macs to traditional Active Directory domains has long been a major pain point for IT admins, resulting in broken mobile accounts and out-of-sync local credentials.
+
+•	Real-time Password Syncing: When using password authentication, PSSO automatically syncs the user’s Microsoft Entra ID (formerly Azure AD) credentials directly with their local Mac account password. This eliminates the need for third-party password syncing tools like Jamf Connect.
+
+•	Onboarding via Setup Assistant: PSSO integrates directly into Apple's Automated Device Enrollment (ADE). Users get a streamlined out-of-the-box experience where logging into the macOS Setup Assistant automatically registers the device in Microsoft Entra.
+	
+### **Compliance and Zero Trust Enforcement**
+---------------------------------------------
+
+•	Early Device Trust: By embedding the Microsoft Enterprise SSO plug-in directly into the macOS operating system, Entra ID registers and evaluates device compliance before a user ever reaches the desktop.
+
+•	Conditional Access Guardrails: PSSO makes it much easier to enforce strict Conditional Access policies. Because the underlying hardware is validated and tied directly to the user's corporate account, organizations can immediately block non-compliant or unmanaged Macs from hitting corporate networks.
+
+
+## Jamf Pro Configuration ##
 
 In order to prepare for Platform SSO deployment, you must perform the following:
 
@@ -394,6 +428,10 @@ I am trying to stick with the company "official" docs as much as possible, but I
 * [Common Platform SSO scenarios for macOS devices](https://learn.microsoft.com/en-us/intune/intune-service/configuration/platform-sso-scenarios)
 * [Troubleshooting the Microsoft Enterprise SSO Extension plugin on Apple devices](https://learn.microsoft.com/en-us/entra/identity/devices/troubleshoot-mac-sso-extension-plugin)
 * [End-to-end guide to get started with macOS endpoints](https://learn.microsoft.com/en-gb/intune/solutions/end-to-end-guides/macos-endpoints-get-started?tabs=psso)
+
+## InTune Customer Success ##
+
+* [New Platform SSO with registration during Automated Device Enrollment on macOS](https://techcommunity.microsoft.com/blog/intunecustomersuccess/new-platform-sso-with-registration-during-automated-device-enrollment-on-macos/4519846)
 
 ### FileWave Documentation
 
