@@ -440,6 +440,10 @@ I am trying to stick with the company "official" docs as much as possible, but I
 
 * [Microsoft Enterprise Platform Single Sign-on for macOS](https://kb.filewave.com/books/macos/page/microsoft-enterprise-platform-single-sign-on-for-macos)
 
+### Iru Documentation
+* [Configure Platform SSO with Entra ID](https://docs.iru.com/en/endpoint/library/library-items-profiles/configure-the-platform-sso-with-microsoft-entra-id-library-item)
+* [Configuring Apple Enrollment - Install Library Items During Setup Assistant](https://docs.iru.com/en/endpoint/enrollment/apple/configuring-apple-enrollment#install-library-items-during-setup-assistant)
+
 ### Okta Setup ###
 
 * [Platform SSO for MacOS](https://trusted.jamf.com/docs/platform-sso-for-macos)
