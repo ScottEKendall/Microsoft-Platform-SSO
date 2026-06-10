@@ -266,6 +266,9 @@ https://github.com/Macjutsu/pseudo
 ![](imnages/../images/AutoFill_Passwords_screen.png)
 https://github.com/ScottEKendall/Microsoft-Platform-SSO/blob/main/scripts/Enforce%20Portal%20AutoFill.sh
 
+>UPDATED 06/09/26 User smross adapted this for Mosyle-targeted machines:
+>https://github.com/TheCrossing-Church/macOS-MosylePlatformSSO
+
 ## 9. Run Device Compliance ##
 
 In most cases, the Device Compliance _should_ run after successful Registration, but sometimes it does fail.  If you want to avoid any failures, you need to make sure that Device Compliance is run after the user(s) registers with Platform SSO. You can do this one of two ways:
