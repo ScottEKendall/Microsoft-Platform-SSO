@@ -2,7 +2,6 @@
 
 This repository is designed to consolidate everything a Jamf Pro admin might need to configure Platform SSO with Microsoft Entra, and to migrate existing Macs.  I am hoping for other contributors to help make this repo a useful source of information for everything related to this framework.  The repo currently focuses on using Platform SSO with the Jamf Pro MDM, but others are welcome to share configuration files, processes, and best practices for other MDMs.
 
->BREAKING NEWS!  It appears that Microsoft has released the official version that supports Tahoe SSO Platform login.  Make sure to get the v5.2604.0 release!  I have the correct link below
 
 <p align="center">
   <img src="images/PlatformSSO_Icon.jpg" />
