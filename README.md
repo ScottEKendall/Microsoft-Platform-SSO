@@ -273,7 +273,7 @@ https://github.com/ScottEKendall/Microsoft-Platform-SSO/blob/main/scripts/Enforc
 
 In most cases, the Device Compliance _should_ run after successful Registration, but sometimes it does fail.  If you want to avoid any failures, you need to make sure that Device Compliance is run after the user(s) registers with Platform SSO. You can do this one of two ways:
 
-1.  Deliver a policy that executes the command `/usr/local/jamf/bin/jamfAAD gatherAADInfo`
+1.  Deliver a policy that executes the command `/Library/Application Support/JAMF/Jamf.app/Contents/MacOS/Jamf Conditional Access.app/Contents/MacOS/JAMF Conditional Access gatherAADInfo`
 2.  Have the user run your Register with Entra policy from SS / SS+
 
 ![](images/JAMF_Device%20Compliance.png)
