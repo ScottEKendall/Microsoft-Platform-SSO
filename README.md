@@ -89,6 +89,7 @@ In order to prepare for Platform SSO deployment, you must perform the following:
 7. [Configure jamfAAD to use WebView](#7--configure-jamfaad-to-use-webview)
 8. [Deliver the Platform SSO Configuration Profile](#8-deliver-the-psso-config-profile)
 9. [Run Device Compliance](#9-run-device-compliance)
+10. [Shared Mac Notes](#10-shared-mac-notes)
 
 ### Misc Stuff (Notes / Scripts / EAs)
 
@@ -361,6 +362,38 @@ function checkTouchID() {
 checkTouchID
 echo "<result>$retval</result>"
   ```
+
+
+## 10. Shared Mac Notes ##
+
+Standard pSSO binds to the _first authenticated user_, meaning that it treats a Mac as a sigle user device. 
+
+To fix the compliance tracking problem with Multi-user Macs, implement the transition to pSSO, by the following guidlines
+
+>These notes are from user @wakco on the MacAdmins Slack channel.  Thanks for the clarification!  
+>>
+>Secure Enclave is a part of every Apple Silicon Mac, and every T1/T2 based Intel Mac, regardless of if a finger print reader exists. The Secure Enclave happens to be where the fingerprints are stored. T2 and Apple Silicon allow for storing more than just fingerprints (hence why T2 is the required minimum, and T1 is identified as not compatible)
+>
+>Although you _can_ usse Secure Enclave as the authentication method, it is strongly discouraged for the following reason: "the issue with SE is every new account has to re-register the computer because the Secure Enclave is storing the Entra join key linked to the logged in user account, so each new account does not have access to it and has to create a new key. Password as such stores the key somewhere the OS can access that is not linked to the logged in user account, and as such is able to access it regardless of who is logged in."
+
+1.  **Set your configuration profile to use Password as the authentication method:**
+
+![](./images/JAMF_Configuration_Policy_Shared%20Macs.png)
+
+2. **Leverage macOS 26 "Authenticated Guest Mode"**. If your multi-user fleet is running modern operating systems, your PSSO configuration profile can utilize Apple’s Authenticated Guest Mode.
+Why this fixes it: Instead of creating competing, permanent local accounts that scramble Jamf's compliance reporting, users sign in directly with their Entra ID credentials at the macOS login screen. macOS provisions a temporary session that inherits the global corporate compliance status, then automatically wipes the session data at logout. 
+ 
+3. **Ensure "Just-in-Time" Account Creation is Enabled**
+Within your pSSO configuration payload, make sure Create new users at the login windowis explicitly checked. This allows subsequent employees or students to step up to the Mac, log in with Entra ID, and have macOS dynamically generate their user context without dropping the broad "Registered" status of the physical hardware asset. 
+
+4. **Summary of the switch**
+
+| | Scenario | Standard Extensible SSO / Registration | Platform SSO (Optimized for Shared Macs) |
+|--------------|----------------|----------------------------------------|------------------------------------------|
+| Token Type   |                | Bound to user's local profile & Keychain | Bound deeply to the native macOS login system |
+| User B Logs In |              | Status flips to "Unregistered" until manual action | Status remains stable via dynamic IdP validation |
+| Admin Effort |                | High (Requires user to launch Self Service) | Low (Handled automatically during OS boot) |
+
 
 ## Checking the logs ##
 
