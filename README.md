@@ -386,11 +386,11 @@ Within your pSSO configuration payload, make sure "**Create new users**" at the 
 
 4. **Summary of the switch**
 
-| | Scenario | Standard Extensible SSO / Registration | Platform SSO (Optimized for Shared Macs) |
-|--------------|----------------|----------------------------------------|------------------------------------------|
-| Token Type   |                | Bound to user's local profile & Keychain | Bound deeply to the native macOS login system |
-| User B Logs In |              | Status flips to "Unregistered" until manual action | Status remains stable via dynamic IdP validation |
-| Admin Effort |                | High (Requires user to launch Self Service) | Low (Handled automatically during OS boot) |
+| Scenario | Standard Extensible SSO / Registration | Platform SSO (Optimized for Shared Macs) |
+|------------------------------|----------------------------------------|------------------------------------------|
+| Token Type   | Bound to user's local profile & Keychain | Bound deeply to the native macOS login system |
+| User B Logs In | Status flips to "Unregistered" until manual action | Status remains stable via dynamic IdP validation |
+| Admin Effort | High (Requires user to launch Self Service) | Low (Handled automatically during OS boot) |
 
 
 ## Checking the logs ##
