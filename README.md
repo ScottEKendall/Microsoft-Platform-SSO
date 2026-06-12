@@ -380,10 +380,9 @@ To fix the compliance tracking problem with Multi-user Macs, implement the trans
 ![](./images/JAMF_Configuration_Policy_Shared%20Macs.png)
 
 2. **Leverage macOS 26 "Authenticated Guest Mode"**. If your multi-user fleet is running modern operating systems, your PSSO configuration profile can utilize Apple’s Authenticated Guest Mode.
-Why this fixes it: Instead of creating competing, permanent local accounts that scramble Jamf's compliance reporting, users sign in directly with their Entra ID credentials at the macOS login screen. macOS provisions a temporary session that inherits the global corporate compliance status, then automatically wipes the session data at logout. 
  
 3. **Ensure "Just-in-Time" Account Creation is Enabled**
-Within your pSSO configuration payload, make sure Create new users at the login windowis explicitly checked. This allows subsequent employees or students to step up to the Mac, log in with Entra ID, and have macOS dynamically generate their user context without dropping the broad "Registered" status of the physical hardware asset. 
+Within your pSSO configuration payload, make sure "**Create new users**" at the login windowis explicitly checked. This allows subsequent employees or students to step up to the Mac, log in with Entra ID, and have macOS dynamically generate their user context without dropping the broad "Registered" status of the physical hardware asset. 
 
 4. **Summary of the switch**
 
