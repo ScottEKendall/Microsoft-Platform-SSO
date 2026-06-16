@@ -89,6 +89,7 @@ In order to prepare for Platform SSO deployment, you must perform the following:
 8. [Deliver the Platform SSO Configuration Profile](#8-deliver-the-psso-config-profile)
 9. [Run Device Compliance](#9-run-device-compliance)
 10. [Shared Mac Notes](#10-shared-mac-notes)
+11. [Modifying Config Profiles post rollout](#11-modifying-profiles-post-rollout)
 
 ### Misc Stuff (Notes / Scripts / EAs)
 
@@ -399,6 +400,12 @@ Strict Conditional Access (CA) rules will block subsequent users from finishing 
 | User B Logs In | Status flips to "Unregistered" until manual action | Status remains stable via dynamic IdP validation |
 | Admin Effort | High (Requires user to launch Self Service) | Low (Handled automatically during OS boot) |
 
+### 11. Modifying Profiles post rollout ###
+
+If you need to modify the config profile for pSSO, you can make changes without forcing users to re-register, _WITH THE FOLLOW EXCEPTIONS_:
+
+1.  If you switch authentication methods (ie. from Secure Enclave to Password) it will force a re-registration
+2.  If you change the contents of this key: _<key>```enable_se_key_biometric_policy```</key>_ it will also force a re-registration
 
 ## Checking the logs ##
 
