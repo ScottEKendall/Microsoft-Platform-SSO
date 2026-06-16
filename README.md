@@ -375,6 +375,7 @@ To fix the compliance tracking problem with Multi-user Macs, implement the trans
 >
 >Although you _can_ usse Secure Enclave as the authentication method, it is strongly discouraged for the following reason: "the issue with SE is every new account has to re-register the computer because the Secure Enclave is storing the Entra join key linked to the logged in user account, so each new account does not have access to it and has to create a new key. Password as such stores the key somewhere the OS can access that is not linked to the logged in user account, and as such is able to access it regardless of who is logged in."
 
+
 1.  **Set your configuration profile to use Password as the authentication method:**
 
 ![](./images/JAMF_Configuration_Policy_Shared%20Macs.png)
@@ -383,6 +384,12 @@ To fix the compliance tracking problem with Multi-user Macs, implement the trans
  
 3. **Ensure "Just-in-Time" Account Creation is Enabled**
 Within your pSSO configuration payload, make sure "**Create new users**" at the login windowis explicitly checked. This allows subsequent employees or students to step up to the Mac, log in with Entra ID, and have macOS dynamically generate their user context without dropping the broad "Registered" status of the physical hardware asset. 
+
+4.  **Check your Entra CA Policies**
+Strict Conditional Access (CA) rules will block subsequent users from finishing their registration if they are evaluated before the system knows who they are. 
+    * **Exclude the Registration App:** In your Entra ID Conditional Access policies, you must explicitly exclude the "User registration app for Device Compliance".
+
+    * **Why this matters:** If this app is not excluded, the 2nd and 3rd users will be blocked from authenticating to the broker when they attempt their initial registration, preventing Jamf from updating their compliance state.
 
 4. **Summary of the switch**
 
@@ -463,8 +470,9 @@ I am trying to stick with the company "official" docs as much as possible, but I
 * [Troubleshooting the Microsoft Enterprise SSO Extension plugin on Apple devices](https://learn.microsoft.com/en-us/entra/identity/devices/troubleshoot-mac-sso-extension-plugin)
 * [End-to-end guide to get started with macOS endpoints](https://learn.microsoft.com/en-gb/intune/solutions/end-to-end-guides/macos-endpoints-get-started?tabs=psso)
 
-### InTune Customer Success ###
+### InTune Documentation ###
 
+* [Platform SSO in macOS Setup Assistant — A Deep Dive](https://intuneirl.com/psso-just-got-smarter-platform-sso-in-macos-setup-assistant-a-deep-dive/)
 * [New Platform SSO with registration during Automated Device Enrollment on macOS](https://techcommunity.microsoft.com/blog/intunecustomersuccess/new-platform-sso-with-registration-during-automated-device-enrollment-on-macos/4519846)
 
 ### FileWave Documentation
