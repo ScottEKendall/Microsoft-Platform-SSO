@@ -135,6 +135,22 @@ You will need to make some changes to your ADE (Automated Device Enrollment) set
 
 4. Make sure to add the Company Portal app in the Enrollment Packages section
 
+### NEW IN JAMF 11.29 ###
+
+The following workflow configuration options are available:
+
+**Attended (SSOe profile installs before enrollment)** 
+  —The Platform SSO application and profile are installed prior to enrollment, and successful user registration is required to enroll with Jamf Pro.
+>Note: Enrollment customizations cannot be used with the attended workflow method.
+
+**Unattended (SSOe profile installs during enrollment)**
+  —Enrollment with Jamf Pro completes, then the computer is held in Setup Assistant to register with Platform SSO before setup completes.
+
+![](./images/JAMF_pSSO_Enrollment.png)
+
+This will "bypass" the Enrollment customization options and go straight to pSSO login before setup will continue
+
+
 ### 4. Remove the old SSO Extension ###
 
 You need to have a configuration profile for the Platform SSO that can be deployed.  *IMPORTANT!*  You CANNOT have both SSO Extension and Platform SSO Extension deployed to all users simultaneously.
