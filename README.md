@@ -150,6 +150,7 @@ The following workflow configuration options are available:
 
 This will "bypass" the Enrollment customization options and go straight to pSSO login before setup will continue
 
+https://learn.jamf.com/r/en-US/jamf-pro-release-notes-current/Simplified_Setup_for_Platform_Single_Sign-on_Enhancements_
 
 ### 4. Remove the old SSO Extension ###
 
