@@ -383,6 +383,9 @@ echo "<result>$retval</result>"
 
 ## 10. Shared Mac Notes ##
 
+>UPDATE: 07/21/26 - After a very lengthy support sessions with microsoft in regards to multi-user mac support with Platform SSO, their official stance is that it only supports authenticated guest mode.  If you have a true multi-user environment where all users must keep their user accounts, Platform SSO will not work properly.  See this article for more: https://learn.microsoft.com/en-us/entra/identity/devices/device-join-macos-platform-single-sign-on-multi-user-device#shared-device-limitations
+At this time, there is no "official" workaround for this.
+
 Standard pSSO binds to the _first authenticated user_, meaning that it treats a Mac as a sigle user device. 
 
 To fix the compliance tracking problem with Multi-user Macs, implement the transition to pSSO, by the following guidlines
@@ -393,8 +396,6 @@ To fix the compliance tracking problem with Multi-user Macs, implement the trans
 >
 Although you _can_ usse Secure Enclave as the authentication method, it is strongly discouraged for the following reason: "the issue with SE is every new account has to re-register the computer because the Secure Enclave is storing the Entra join key linked to the logged in user account, so each new account does not have access to it and has to create a new key. Password as such stores the key somewhere the OS can access that is not linked to the logged in user account, and as such is able to access it regardless of who is logged in."
 
->UPDATE: 07/21/26 - After a very lengthy support sessions with microsoft in regards to multi-user mac support with Platform SSO, their official stance is that it only supports authenticated guest mode.  If you have a true multi-user environment where all users must keep their user accounts, Platform SSO will not work properly.  See this article for more: https://learn.microsoft.com/en-us/entra/identity/devices/device-join-macos-platform-single-sign-on-multi-user-device#shared-device-limitations
-At this time, there is no "official" workaround for this.
 
 1.  **Set your configuration profile to use Password as the authentication method:**
 
